@@ -8,8 +8,9 @@ class ListViewScreen extends StatefulWidget {
 }
 
 class _ListViewScreenState extends State<ListViewScreen> {
-  List<String> slDauVao = ['A', 'B', 'C', 'D'];
+  List<String> slDauVao = ['A', 'B'];
   int counter = 0;
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -22,62 +23,45 @@ class _ListViewScreenState extends State<ListViewScreen> {
           child: Center(
               child: Column(
             children: [
-              Expanded(
-                child: ListView(
-                  shrinkWrap: true,
-                  children: [
-                    Container(
-                      height: 50,
-                      color: Colors.yellow,
-                      child: Center(
-                        child: Text('Phan thu thu 1'),
-                      ),
+              ListView(
+                shrinkWrap: true,
+                children: [
+                  Container(
+                    height: 30,
+                    color: Colors.yellow,
+                    child: Center(
+                      child: Text('Phan thu thu 1'),
                     ),
-                    Container(
-                      height: 50,
-                      color: Colors.green,
-                      child: Center(
-                        child: Text('Phan thu thu 2'),
-                      ),
+                  ),
+                  Container(
+                    height: 30,
+                    color: Colors.green,
+                    child: Center(
+                      child: Text('Phan thu thu 2'),
                     ),
-                    Container(
-                      height: 50,
-                      color: Colors.red,
-                      child: Center(
-                        child: Text('Phan thu thu 3'),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 10,
+                  ),
+                ],
               ),
               builListView2(),
-              SizedBox(
-                height: 10,
-              ),
+              builListView3(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ElevatedButton(onPressed: (){
-                    counter ++;
-                    slDauVao.add(counter.toString());
-                    setState(() {
-
-                    });
-                  },
+                  ElevatedButton(
+                      onPressed: () {
+                        counter++;
+                        slDauVao.add(counter.toString());
+                        setState(() {});
+                      },
                       child: Text('Add item')),
-                  ElevatedButton(onPressed: (){
-                    slDauVao.removeAt(0);
-                    setState(() {
-
-                    });
-                  },
+                  ElevatedButton(
+                      onPressed: () {
+                        slDauVao.removeAt(0);
+                        setState(() {});
+                      },
                       child: Text('Delete item'))
                 ],
               ),
-
               ElevatedButton(
                   onPressed: () {
                     Navigator.pop(context);
@@ -90,13 +74,13 @@ class _ListViewScreenState extends State<ListViewScreen> {
 
   Widget builListView2() {
     return Container(
-      height: 200,
+      height: 100,
       child: (ListView.builder(
         shrinkWrap: true,
         itemCount: slDauVao.length,
         itemBuilder: (BuildContext context, int position) {
           return (Container(
-            height: 50,
+            height: 30,
             color: Color.fromARGB(Random().nextInt(255), Random().nextInt(255),
                 Random().nextInt(255), Random().nextInt(255)),
             child: Center(
@@ -105,6 +89,32 @@ class _ListViewScreenState extends State<ListViewScreen> {
             )),
           ));
         },
+      )),
+    );
+  }
+  Widget builListView3() {
+    return Container(
+      height: 200,
+      child: (ListView.separated(
+        shrinkWrap: true,
+        itemCount: slDauVao.length,
+        itemBuilder: (BuildContext context, int position) {
+          return (Container(
+            height: 30,
+            color: Color.fromARGB(Random().nextInt(255), Random().nextInt(255),
+                Random().nextInt(255), Random().nextInt(255)),
+            child: Center(
+                child: Text(
+                  'Gia tri ${slDauVao[position]}',
+                )),
+          ));
+        }, separatorBuilder: (BuildContext context, int index)
+      { return(Divider(
+        thickness: 1,
+        color: Colors.red,
+        indent: 10,
+        endIndent: 10,
+      )); },
       )),
     );
   }
