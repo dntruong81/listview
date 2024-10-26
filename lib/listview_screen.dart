@@ -79,19 +79,29 @@ class _ListViewScreenState extends State<ListViewScreen> {
         shrinkWrap: true,
         itemCount: slDauVao.length,
         itemBuilder: (BuildContext context, int position) {
-          return (Container(
-            height: 30,
-            color: Color.fromARGB(Random().nextInt(255), Random().nextInt(255),
-                Random().nextInt(255), Random().nextInt(255)),
-            child: Center(
-                child: Text(
-              'Gia tri ${slDauVao[position]}',
+          return InkWell(
+            onTap: () {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text('Vua bam vao Item: ${slDauVao[position]}'),
+                duration: Duration(seconds: 1),
+              ));
+            },
+            child: (Container(
+              height: 30,
+              /*color: Color.fromARGB(Random().nextInt(255), Random().nextInt(
+                255),
+            Random().nextInt(255), Random().nextInt(255)),*/
+              child: Center(
+                  child: Text(
+                'Gia tri ${slDauVao[position]}',
+              )),
             )),
-          ));
+          );
         },
       )),
     );
   }
+
   Widget builListView3() {
     return Container(
       height: 200,
@@ -105,16 +115,13 @@ class _ListViewScreenState extends State<ListViewScreen> {
                 Random().nextInt(255), Random().nextInt(255)),
             child: Center(
                 child: Text(
-                  'Gia tri ${slDauVao[position]}',
-                )),
+              'Gia tri ${slDauVao[position]}',
+            )),
           ));
-        }, separatorBuilder: (BuildContext context, int index)
-      { return(Divider(
-        thickness: 1,
-        color: Colors.red,
-        indent: 10,
-        endIndent: 10,
-      )); },
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return (Divider());
+        },
       )),
     );
   }
