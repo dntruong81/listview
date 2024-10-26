@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'detail_screen.dart';
 
 class ListViewScreen extends StatefulWidget {
   @override
@@ -81,16 +82,18 @@ class _ListViewScreenState extends State<ListViewScreen> {
         itemBuilder: (BuildContext context, int position) {
           return InkWell(
             onTap: () {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text('Vua bam vao Item: ${slDauVao[position]}'),
-                duration: Duration(seconds: 1),
-              ));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (BuildContext context) {
+                    return DetailScreen(item: slDauVao[position] );
+                  }));
             },
             child: (Container(
               height: 30,
-              /*color: Color.fromARGB(Random().nextInt(255), Random().nextInt(
-                255),
-            Random().nextInt(255), Random().nextInt(255)),*/
+              color: Color.fromARGB(
+                  Random().nextInt(255),
+                  Random().nextInt(255),
+                  Random().nextInt(255),
+                  Random().nextInt(255)),
               child: Center(
                   child: Text(
                 'Gia tri ${slDauVao[position]}',
