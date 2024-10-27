@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:listview/gridview_screen.dart';
 import 'listview_screen.dart';
 
 void main() {
@@ -52,15 +53,28 @@ class _MyHomePageState extends State<MyHomePage> {
               'Man hinh chinh (so 1)',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            ElevatedButton(
-                onPressed: () {
-                  //Lenh chuyen man hinh
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (BuildContext context) {
-                    return ListViewScreen();
-                  }));
-                },
-                child: Icon(Icons.navigate_next))
+            SizedBox(height: 100),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                    onPressed: () {
+                      //Lenh chuyen man hinh
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (BuildContext context) {
+                        return ListViewScreen();
+                      }));
+                    },
+                    child: Text('Next ListView')),
+                ElevatedButton(
+                    onPressed: () {
+                      Route route = MaterialPageRoute(
+                          builder: (context) => GridViewScreen1());
+                      Navigator.push(context, route);
+                    },
+                    child: Text('Next GridView'))
+              ],
+            )
           ],
         ),
       ),
