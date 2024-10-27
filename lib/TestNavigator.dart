@@ -5,9 +5,9 @@ void main() {
 }
 
 class Routes {
- static String screen1 = '/screen1';
- static String screen2 = '/screen2';
- static String screen3 = '/screen3';
+  static String screen1 = '/screen1';
+  static String screen2 = '/screen2';
+  static String screen3 = '/screen3';
 }
 
 class MyAppNavigator extends StatelessWidget {
@@ -18,9 +18,9 @@ class MyAppNavigator extends StatelessWidget {
         routes: {
           Routes.screen1: (context) => ScreenTest1(),
           Routes.screen2: (context) => ScreenTest2(),
-         // Routes.screen3: (context) => ScreenTest3()
+          // Routes.screen3: (context) => ScreenTest3()
         },
-         onGenerateRoute: (settings) {
+        onGenerateRoute: (settings) {
           /* switch (settings.name){
             case ('/screen1'):
               return MaterialPageRoute(builder: (context) => ScreenTest1());
@@ -39,7 +39,6 @@ class MyAppNavigator extends StatelessWidget {
           else
             return MaterialPageRoute(builder: (context) => ScreenTest3());
         },
-
         home: MyHomeScreen());
   }
 }
@@ -58,10 +57,13 @@ class MyHomeScreen extends StatelessWidget {
           children: [
             ElevatedButton(
                 onPressed: () async {
-                  Route route =
-                      MaterialPageRoute(builder: (context) => ScreenTest1());
+                  Route route = MaterialPageRoute(
+                      builder: (context) => ScreenTest1(
+                            param: 'Hello',
+                          ));
                   final result = await Navigator.push(context, route);
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(result)));
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(SnackBar(content: Text(result)));
                 },
                 child: Text('Navigator cach 1')),
             ElevatedButton(
@@ -82,6 +84,10 @@ class MyHomeScreen extends StatelessWidget {
 }
 
 class ScreenTest1 extends StatelessWidget {
+  final String? param;
+
+  ScreenTest1({this.param});
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -93,9 +99,12 @@ class ScreenTest1 extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            ElevatedButton(onPressed: (){
-              Navigator.pop(context,'Gia tri tra ve tu man hinh 1');
-            }, child: Text('Quay ve')),
+            Text('Gia tri nhan duoc: $param'),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context, 'Gia tri tra ve tu man hinh 1');
+                },
+                child: Text('Quay ve')),
           ],
         ),
       ),
