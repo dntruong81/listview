@@ -15,29 +15,18 @@ class MyAppNavigator extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return MaterialApp(
-        routes: {
-          Routes.screen1: (context) => ScreenTest1(),
-          Routes.screen2: (context) => ScreenTest2(),
+        /*routes: {
+          //Routes.screen1: (context) => ScreenTest1(),
+          //Routes.screen2: (context) => ScreenTest2(),
           // Routes.screen3: (context) => ScreenTest3()
-        },
+        }*/
         onGenerateRoute: (settings) {
-          /* switch (settings.name){
-            case ('/screen1'):
-              return MaterialPageRoute(builder: (context) => ScreenTest1());
-              break;
-              case ('/screen2'):
-                return MaterialPageRoute(builder: (context) => ScreenTest2());
-                break;
-            case ('/screen3'):
-              return MaterialPageRoute(builder: (context) => ScreenTest3());
-              break;
-          }*/
-          if (settings.name == Routes.screen1) {
-            return MaterialPageRoute(builder: (context) => ScreenTest1());
-          } else if (settings.name == Routes.screen2)
-            return MaterialPageRoute(builder: (context) => ScreenTest2());
+          if (settings.name == Routes.screen1)
+            return MaterialPageRoute(settings:settings,builder: (context) => ScreenTest1());
+           else if (settings.name == Routes.screen2)
+            return MaterialPageRoute(settings:settings,builder: (context) => ScreenTest2());
           else
-            return MaterialPageRoute(builder: (context) => ScreenTest3());
+            return MaterialPageRoute(settings:settings,builder: (context) => ScreenTest3());
         },
         home: MyHomeScreen());
   }
@@ -59,7 +48,7 @@ class MyHomeScreen extends StatelessWidget {
                 onPressed: () async {
                   Route route = MaterialPageRoute(
                       builder: (context) => ScreenTest1(
-                            param: 'Hello',
+                            param: 'Hello Screen 1 ',
                           ));
                   final result = await Navigator.push(context, route);
                   ScaffoldMessenger.of(context)
@@ -68,12 +57,12 @@ class MyHomeScreen extends StatelessWidget {
                 child: Text('Navigator cach 1')),
             ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, Routes.screen2);
+                  Navigator.pushNamed(context, Routes.screen2,arguments:'Hello Screen 2');
                 },
                 child: Text('Navigator cach 2')),
             ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, Routes.screen3);
+                  Navigator.pushNamed(context, Routes.screen3, arguments:'Hello Screen 2');
                 },
                 child: Text('Navigator cach 3'))
           ],
@@ -113,16 +102,27 @@ class ScreenTest1 extends StatelessWidget {
 }
 
 class ScreenTest2 extends StatelessWidget {
+  final String? param;
+  ScreenTest2({this.param});
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+    final _param = ModalRoute.of(context)?.settings.arguments;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
         title: Text('Man hinh thu 2'),
       ),
+      body:Center(
+        child: Column(
+          children: [
+            Text('Param: $_param'),
+          ],
+        ),
+      )
     );
   }
+
 }
 
 class ScreenTest3 extends StatelessWidget {
