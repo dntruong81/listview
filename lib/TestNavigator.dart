@@ -16,10 +16,12 @@ class MyAppNavigator extends StatelessWidget {
     // TODO: implement build
     return MaterialApp(
         /*routes: {
-          //Routes.screen1: (context) => ScreenTest1(),
-          //Routes.screen2: (context) => ScreenTest2(),
-          // Routes.screen3: (context) => ScreenTest3()
-        }*/
+          '/screen1': (context) => ScreenTest1(),
+          '/screen2': (context) => ScreenTest2(),
+          Routes.screen3: (context) => ScreenTest3()
+        }
+        */
+
         onGenerateRoute: (settings) {
           if (settings.name == Routes.screen1)
             return MaterialPageRoute(settings:settings,builder: (context) => ScreenTest1());
@@ -57,7 +59,7 @@ class MyHomeScreen extends StatelessWidget {
                 child: Text('Navigator cach 1')),
             ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, Routes.screen2,arguments:'Hello Screen 2');
+                  Navigator.pushNamed(context,'/screen2',arguments:'Man hinh thu 2');
                 },
                 child: Text('Navigator cach 2')),
             ElevatedButton(
