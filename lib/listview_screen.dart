@@ -9,7 +9,7 @@ class ListViewScreen extends StatefulWidget {
 }
 
 class _ListViewScreenState extends State<ListViewScreen> {
-  List<String> slDauVao = ['A', 'B'];
+  List<String> slDauVao = ['A', 'B','C'];
   int counter = 0;
 
   @override
